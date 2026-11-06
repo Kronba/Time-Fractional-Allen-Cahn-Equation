@@ -2,7 +2,7 @@
 
 本仓库实现论文 *J. Jia, H. Zhang, H. Xu, X. Jiang, "A fast stabilized ADI method
 for time-fractional Allen-Cahn equation", Applied Numerical Mathematics 165
-(2021) 216–231* 中 **Example 2** 的数值模拟（Python 版，直接法）：
+(2021) 216–231* 中 **Example 2** 的数值模拟：
 
 $$
 \mathrm{D}_t^\alpha u - \mu\,\Delta u + (u - u^3) = 0,
@@ -21,7 +21,7 @@ $\mu = \varepsilon^2 = 0.01$。时间方向用分数阶 BDF2（FBDF2），空间
 ![Allen-Cahn 演化图](case5_results/figures/case5_4x4.png)
 
 图：不同分数阶阶数 \(\alpha$（列）\)与终止时间 $T$（行）下的相场演化
-（$N=256$，$\tau=0.005$）。可以看到随着 $\alpha$ 减小，粗化（coarsening）
+（N=25，$\tau=0.005$）。可以看到随着 $\alpha$ 减小，粗化（coarsening）
 到达平衡所需的时间变长。
 
 ---
@@ -29,10 +29,10 @@ $\mu = \varepsilon^2 = 0.01$。时间方向用分数阶 BDF2（FBDF2），空间
 ## 项目结构
 
 ```
-├── main.py                # 入口：计算全部 (T, alpha) 组合并出图
+├── main.py                # 入口：计算全部参数组合并出图
 ├── config.py              # 全部可调参数与输出路径
-├── adi_solver.py          # FBDF2-ADI 求解器（一个 (T, alpha) 组合）
-├── fractional_weights.py  # FBDF2 卷积权重 {ω_k} 的递推
+├── adi_solver.py          # FBDF2-ADI 求解器
+├── fractional_weights.py  # FBDF2 卷积权重的递推
 ├── plotting.py            # 演化图的绘制
 ├── requirements.txt       # 依赖清单
 ├── run.sh                 # 一键配置环境并运行
@@ -121,7 +121,7 @@ n\,d_0\,\omega_n =
 \qquad \omega_0 = d_0^{\,\alpha},
 $$
 
-（$n=1$ 时第二项取 0）。因为 $\delta(1) = 0$，所以 $\sum_{k\ge0}\omega_k = 0$：
+（n=1 时第二项取 0）。因为 $\delta(1) = 0$，所以 $\sum_{k\ge0}\omega_k = 0$：
 该离散算子对常数精确为零，这是下面初值修正恒等式的来源。
 
 Caputo 导数的离散逼近取

@@ -1,0 +1,17 @@
+[project]
+name = "fractional-allen-cahn-equation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Kronba", email = "xainhualostlanslot@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+fractional-allen-cahn-equation = "fractional_allen_cahn_equation:main"
+
+[build-system]
+requires = ["uv_build>=0.12.12,<0.13.0"]
+build-backend = "uv_build"

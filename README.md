@@ -1,6 +1,6 @@
-# 时间分数阶 Allen-Cahn 方程的 FBDF2-ADI 求解器
+# Time Fractional Allen-Cahn Equation
 
-本仓库实现论文 *J. Jia, H. Zhang, H. Xu, X. Jiang, "A fast stabilized ADI method
+本仓库参考论文 *J. Jia, H. Zhang, H. Xu, X. Jiang, "A fast stabilized ADI method
 for time-fractional Allen-Cahn equation", Applied Numerical Mathematics 165
 (2021) 216–231* 中 **Example 2** 的数值模拟：
 
@@ -14,15 +14,11 @@ u(x,y,0) = 0.05\,(2\,\mathrm{rand}(x,y) - 1),
 \qquad u|_{\partial\Omega} = 0,
 $$
 
-其中 $\mathrm{D}_t^\alpha$ 为 Caputo 分数阶导数（\(0 < \alpha \le 1\)），
-$\mu = \varepsilon^2 = 0.01$。时间方向用分数阶 BDF2（FBDF2），空间方向用五点
-中心差分 + ADI 分裂（含混合导数修正项），详细推导见下文。
+其中 $\mathrm{D}_t^\alpha$ 为 Caputo 分数阶导数（0 < \alpha \le 1），$\mu = \varepsilon^2 = 0.01$。时间方向用分数阶 BDF2（FBDF2），空间方向用五点中心差分 + ADI 分裂（含混合导数修正项），具体的离散方法实现见下文“离散化与矩阵方法构造”部分。
 
 ![Allen-Cahn 演化图](case5_results/figures/case5_4x4.png)
 
-图：不同分数阶阶数 \(\alpha$（列）\)与终止时间 $T$（行）下的相场演化
-（N=25，$\tau=0.005$）。可以看到随着 $\alpha$ 减小，粗化（coarsening）
-到达平衡所需的时间变长。
+图：不同分数阶阶数与终止时间T下的相场演化（N=25，$\tau=0.005$）。可以看到随着 $\alpha$ 减小，粗化到达平衡所需的时间变长。
 
 ---
 
@@ -77,11 +73,11 @@ python3 -m venv .venv
 | `SEED` | `10086` | 随机初值 $u_0 = 0.05(2\,\mathrm{rand}-1)$ 的种子 |
 | `PARAMS` | `mu = 0.1**2` | 扩散系数 $\mu = \varepsilon^2$（求解器只读 `mu`） |
 
-修改参数后直接重跑 `main.py` 即可，数据与图像都会更新。
+修改参数后直接运行`main.py` 即可，数据与图像都会更新。
 
 ---
 
-## 算法推导
+## 离散化与矩阵方法构造
 
 ### 1. 连续问题
 
@@ -252,7 +248,7 @@ $$
 | 8 | −0.964812 / 0.968481 | −0.852015 / 0.855500 | −0.757782 / 0.759772 | −0.630389 / 0.627839 |
 | 16 | −1.000000 / 0.999997 | −0.962962 / 0.963048 | −0.899417 / 0.899509 | −0.774412 / 0.774194 |
 
-（$T=0$ 的四个数据文件保存同一个随机初值场。）可以看到：$T=16$ 时
+（T=0 的四个数据文件保存同一个随机初值场。）可以看到：$T=16$ 时
 $\alpha=1$ 的解已到达平衡态 $\pm1$；$\alpha$ 越小，相分离与粗化越慢，达到
 平衡所需的"弛豫时间"越长，与论文的结论一致。
 

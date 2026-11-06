@@ -20,7 +20,7 @@ $\mu = \varepsilon^2 = 0.01$。时间方向用分数阶 BDF2（FBDF2），空间
 
 ![Allen-Cahn 演化图](case5_results/figures/case5_4x4.png)
 
-图：不同分数阶阶数 $\alpha$（列）与终止时间 $T$（行）下的相场演化
+图：不同分数阶阶数 \(\alpha$（列）\)与终止时间 $T$（行）下的相场演化
 （$N=256$，$\tau=0.005$）。可以看到随着 $\alpha$ 减小，粗化（coarsening）
 到达平衡所需的时间变长。
 

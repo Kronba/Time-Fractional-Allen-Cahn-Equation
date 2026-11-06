@@ -14,7 +14,7 @@ u(x,y,0) = 0.05\,(2\,\mathrm{rand}(x,y) - 1),
 \qquad u|_{\partial\Omega} = 0,
 $$
 
-其中 $\mathrm{D}_t^\alpha$ 为 Caputo 分数阶导数（$0 < \alpha \le 1$），
+其中 $\mathrm{D}_t^\alpha$ 为 Caputo 分数阶导数（\(0 < \alpha \le 1\)），
 $\mu = \varepsilon^2 = 0.01$。时间方向用分数阶 BDF2（FBDF2），空间方向用五点
 中心差分 + ADI 分裂（含混合导数修正项），详细推导见下文。
 
